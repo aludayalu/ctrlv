@@ -1,0 +1,15 @@
+<div>Paste an image anywhere on this page to download it.</div>
+<script>
+document.addEventListener("paste", (e) => {
+  const file = e.clipboardData?.files[0];
+
+  if (file?.type.startsWith("image/")) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(file);
+    const ext = file.type.split('/')[1] || 'png';
+    a.download = `${Date.now()}.${ext}`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+});
+</script>
